@@ -6,6 +6,11 @@
     There are 3 main services such as: Extract service, Transform service and Load Service.
     Each one of those have it's own queue for processing.
 
+## Prerequisite
+
+    * NodeJs
+    * MongoDB
+    
 ## Available Scripts
 
     In the project directory, you can run:
