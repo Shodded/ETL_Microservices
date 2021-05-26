@@ -1,0 +1,13 @@
+{
+    "env": "Dev",
+    "serviceName": "loadService",
+    "queueReceiver":{
+        "connectionString":"http://localhost:3003"
+    },
+    "queueSender":{
+        "connectionString":"http://localhost:3003"
+    },
+    "mongoDB":{
+        "connectionString": "mongodb://localhost:27017/local"
+    }
+}

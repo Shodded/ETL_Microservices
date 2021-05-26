@@ -1,0 +1,426 @@
+
+[
+{
+    "_id": {
+        "$oid": "6071a0a1614de73a9651ee5b"
+    },        
+   	"siteId": "12345",
+	"integrationId": "1111",
+	"entity": "treatment",
+	"extract":{
+		"type": "csvToJsonFile",
+		"extractInfo":{
+			"path": "c:\\\\feed",
+			"fileName": "hospital_1_Treatment.csv",
+			"delimiter": ","
+		},
+		"sourceFormat": "json",
+		"sourcePath": ""
+	},
+	"transform": {
+		"schemaDefinition":[
+			{
+				"sourceObj": "original",
+				"sourcePath": "PatientID",
+				"targetObj": "dest",
+				"targetField": "patient_id",
+				"processType": "directPath"
+			},
+			{
+				"targetObj": "dest",
+				"targetField": "start_date",
+				"processType": "expressionFunction",
+				"convertInfo":{
+					"expressionFunction": {
+						"evaluate": "fn.date.format(original.StartDate,'MM/DD/YYYY','YYYY-MM-DD')"
+					}
+				}
+			},
+			{
+				"targetObj": "dest",
+				"targetField": "end_date",
+				"processType": "expressionFunction",
+				"convertInfo":{
+					"expressionFunction": {
+						"evaluate": "fn.date.format(original.EndDate,'MM/DD/YYYY','YYYY-MM-DD')"
+					}
+				}
+			},
+			{
+				"sourceObj": "original",
+				"sourcePath": "Active",
+				"targetObj": "dest",
+				"targetField": "active",
+				"processType": "directPath"
+			},
+			{
+				"sourceObj": "original",
+				"sourcePath": "DisplayName",
+				"targetObj": "dest",
+				"targetField": "display_name",
+				"processType": "directPath"
+			},
+			{
+				"sourceObj": "original",
+				"sourcePath": "Diagnoses",
+				"targetObj": "dest",
+				"targetField": "diagnose",
+				"processType": "directPath"
+			},
+			{
+				"sourceObj": "original",
+				"sourcePath": "TreatmentLine",
+				"targetObj": "dest",
+				"targetField": "treatment_line",
+				"processType": "directPath"
+			},
+			{
+				"sourceObj": "original",
+				"sourcePath": "CyclesXDays",
+				"targetObj": "dest",
+				"targetField": "cycles_treatment",
+				"processType": "directPath"
+			},
+			{
+				"sourceObj": "original",
+				"sourcePath": "TreatmentID",
+				"targetObj": "dest",
+				"targetField": "treatment_id",
+				"processType": "directPath"
+			}]
+	},
+	"load": {
+		"constraintFields": ["display_name","patient_id","start_date"]
+	}
+},
+{
+    "_id": {
+        "$oid": "607559fa614de73a9651ee64"
+    },        
+   	"siteId": "12345",
+	"integrationId": "1111",
+	"entity": "patient",
+	"extract":{
+		"type": "csvToJsonFile",
+		"extractInfo":{
+			"path": "c:\\\\feed",
+			"fileName": "hospital_1_Patient.csv",
+			"delimiter": ","
+		},
+		"sourceFormat": "json",
+		"sourcePath": ""
+	},
+	"transform": {
+		"schemaDefinition":[
+			{
+				"sourceObj": "original",
+				"sourcePath": "PatientID",
+				"targetObj": "dest",
+				"targetField": "patient_id",
+				"processType": "directPath"
+			},
+			{
+				"sourceObj": "original",
+				"sourcePath": "MRN",
+				"targetObj": "dest",
+				"targetField": "mrn",
+				"processType": "directPath"
+			},
+			{
+				"targetObj": "dest",
+				"targetField": "birth_date",
+				"processType": "expressionFunction",
+				"convertInfo":{
+					"expressionFunction": {
+						"evaluate": "fn.date.format(original.PatientDOB.substring(0, 10),'MM/DD/YYYY',null,false)"
+					}
+				}
+			},
+			{
+				"sourceObj": "original",
+				"sourcePath": "IsDeceased",
+				"targetObj": "dest",
+				"targetField": "is_deceased",
+				"processType": "directPath"
+			},
+			{
+				"targetObj": "dest",
+				"targetField": "date_of_death",
+				"processType": "expressionFunction",
+				"convertInfo":{
+					"expressionFunction": {
+						"evaluate": "original.DOD_TS ? fn.date.format(original.DOD_TS.substring(0, 10),'MM/DD/YYYY',null,false) : null"
+					}
+				}
+			},
+			{
+				"sourceObj": "original",
+				"sourcePath": "LastName",
+				"targetObj": "dest",
+				"targetField": "last_name",
+				"processType": "directPath"
+			},
+			{
+				"sourceObj": "original",
+				"sourcePath": "FirstName",
+				"targetObj": "dest",
+				"targetField": "first_name",
+				"processType": "directPath"
+			},
+			{
+				"sourceObj": "original",
+				"sourcePath": "Sex",
+				"targetObj": "dest",
+				"targetField": "sex",
+				"processType": "directPath"
+			},
+			{
+				"sourceObj": "original",
+				"sourcePath": "Address",
+				"targetObj": "dest",
+				"targetField": "address",
+				"processType": "directPath"
+			},
+			{
+				"sourceObj": "original",
+				"sourcePath": "City",
+				"targetObj": "dest",
+				"targetField": "city",
+				"processType": "directPath"
+			},
+			{
+				"sourceObj": "original",
+				"sourcePath": "State",
+				"targetObj": "dest",
+				"targetField": "state",
+				"processType": "directPath"
+			},
+			{
+				"sourceObj": "original",
+				"sourcePath": "ZipCode",
+				"targetObj": "dest",
+				"targetField": "zip_code",
+				"processType": "directPath"
+			},
+			{
+				"sourceObj": "original",
+				"sourcePath": "LastModifiedDate",
+				"targetObj": "dest",
+				"targetField": "last_modified_date",
+				"processType": "directPath"
+			}]
+	},
+	"load": {
+		"constraintFields": ["patient_id"]
+	}
+},
+
+{
+    "_id": {
+        "$oid": "60755a0a614de73a9651ee65"
+    },        
+   	"siteId": "456456",
+	"integrationId": "2222",
+	"entity": "treatment",
+	"extract":{
+		"type": "csvToJsonFile",
+		"extractInfo":{
+			"path": "c:\\\\feed",
+			"fileName": "hospital_2_Treatment.csv",
+			"delimiter": ","
+		},
+		"sourceFormat": "json",
+		"sourcePath": ""
+	},
+	"transform": {
+		"schemaDefinition":[
+			{
+				"sourceObj": "original",
+				"sourcePath": "TreatmentId",
+				"targetObj": "dest",
+				"targetField": "treatment_id",
+				"processType": "directPath"
+			},
+			{
+				"sourceObj": "original",
+				"sourcePath": "PatientId",
+				"targetObj": "dest",
+				"targetField": "patient_id",
+				"processType": "directPath"
+			},
+			{
+				"sourceObj": "original",
+				"sourcePath": "ProtocolID",
+				"targetObj": "dest",
+				"targetField": "protocol_id",
+				"processType": "directPath"
+			},
+			{
+				"targetObj": "dest",
+				"targetField": "start_date",
+				"processType": "expressionFunction",
+				"convertInfo":{
+					"expressionFunction": {
+						"evaluate": "fn.date.format(original.StartDate.substring(0, 10),'MM/DD/YYYY','YYYY-MM-DD')"
+					}
+				}
+			},
+			{
+				"targetObj": "dest",
+				"targetField": "end_date",
+				"processType": "expressionFunction",
+				"convertInfo":{
+					"expressionFunction": {
+						"evaluate": "fn.date.format(original.EndDate.substring(0, 10),'MM/DD/YYYY','YYYY-MM-DD')"
+					}
+				}
+			},
+			{
+				"sourceObj": "original",
+				"sourcePath": "Status",
+				"targetObj": "dest",
+				"targetField": "status",
+				"processType": "directPath"
+			},
+			{
+				"sourceObj": "original",
+				"sourcePath": "DisplayName",
+				"targetObj": "dest",
+				"targetField": "display_name",
+				"processType": "directPath"
+			},
+			{
+				"sourceObj": "original",
+				"sourcePath": "AssociatedDiagnoses",
+				"targetObj": "dest",
+				"targetField": "diagnose",
+				"processType": "directPath"
+			},
+			{
+				"sourceObj": "original",
+				"sourcePath": "NumberOfCycles",
+				"targetObj": "dest",
+				"targetField": "cycles_treatment",
+				"processType": "directPath"
+			}
+			]
+	},
+	"load": {
+		"constraintFields": ["display_name","patient_id","start_date"]
+	}
+},
+{
+    "_id": {
+        "$oid": "60755a16614de73a9651ee66"
+    },        
+   	"siteId": "456456",
+	"integrationId": "2222",
+	"entity": "patient",
+	"extract":{
+		"type": "csvToJsonFile",
+		"extractInfo":{
+			"path": "c:\\\\feed",
+			"fileName": "hospital_2_Patient.csv",
+			"delimiter": ","
+		},
+		"sourceFormat": "json",
+		"sourcePath": ""
+	},
+	"transform": {
+		"schemaDefinition":[
+			{
+				"sourceObj": "original",
+				"sourcePath": "PatientID",
+				"targetObj": "dest",
+				"targetField": "patient_id",
+				"processType": "directPath"
+			},
+			{
+				"sourceObj": "original",
+				"sourcePath": "MRN",
+				"targetObj": "dest",
+				"targetField": "mrn",
+				"processType": "directPath"
+			},
+			{
+				"targetObj": "dest",
+				"targetField": "birth_date",
+				"processType": "expressionFunction",
+				"convertInfo":{
+					"expressionFunction": {
+						"evaluate": "fn.date.format(original.PatientDOB.substring(0, 10),'MM/DD/YYYY',null,false)"
+					}
+				}
+			},
+			{
+				"targetObj": "dest",
+				"targetField": "date_of_death",
+				"processType": "expressionFunction",
+				"convertInfo":{
+					"expressionFunction": {
+						"evaluate": "original.DOD_TS ? fn.date.format(original.DeathDate.substring(0, 10),'MM/DD/YYYY',null,false): null"
+					}
+				}
+			},
+			{
+				"sourceObj": "original",
+				"sourcePath": "IsPatientDeceased",
+				"targetObj": "dest",
+				"targetField": "is_deceased",
+				"processType": "directPath"
+			},
+			{
+				"sourceObj": "original",
+				"sourcePath": "LastName",
+				"targetObj": "dest",
+				"targetField": "last_name",
+				"processType": "directPath"
+			},
+			{
+				"sourceObj": "original",
+				"sourcePath": "FirstName",
+				"targetObj": "dest",
+				"targetField": "first_name",
+				"processType": "directPath"
+			},
+			{
+				"sourceObj": "original",
+				"sourcePath": "Sex",
+				"targetObj": "dest",
+				"targetField": "sex",
+				"processType": "directPath"
+			},
+			{
+				"sourceObj": "original",
+				"sourcePath": "AddressLine",
+				"targetObj": "dest",
+				"targetField": "address",
+				"processType": "directPath"
+			},
+			{
+				"sourceObj": "original",
+				"sourcePath": "AddressCity",
+				"targetObj": "dest",
+				"targetField": "city",
+				"processType": "directPath"
+			},
+			{
+				"sourceObj": "original",
+				"sourcePath": "AddressState",
+				"targetObj": "dest",
+				"targetField": "state",
+				"processType": "directPath"
+			},
+			{
+				"sourceObj": "original",
+				"sourcePath": "AddressZipCode",
+				"targetObj": "dest",
+				"targetField": "zip_code",
+				"processType": "directPath"
+			}]
+	},
+	"load": {
+		"constraintFields": ["patient_id"]
+	}
+}
+]

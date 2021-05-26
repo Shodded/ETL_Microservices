@@ -1,0 +1,49 @@
+{
+  "name": "integration-processor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "watch-extract": "nodemon ./services/etlProcessors/extractService/server.js",
+    "watch-transform": "nodemon ./services/etlProcessors/transformService/server.js",
+    "watch-load": "nodemon ./services/etlProcessors/loadService/server.js",
+    "watch-scheduler": "nodemon ./services/schedulerService/server.js",
+    "watch-queue-extract": "nodemon ./queueMocks/queueExtract/server.js",
+    "watch-queue-transform": "nodemon ./queueMocks/queueTransform/server.js",
+    "watch-queue-load": "nodemon ./queueMocks/queueLoad/server.js",
+    "extract": "nodemon ./services/etlProcessors/extractService/server.js",
+    "transform": "nodemon ./services/etlProcessors/transformService/server.js",
+    "load": "nodemon ./services/etlProcessors/loadService/server.js",
+    "queue-extract": "node ./queueMocks/queueExtract/server.js",
+    "queue-transform": "node ./queueMocks/queueTransform/server.js",
+    "queue-load": "node ./queueMocks/queueLoad/server.js",
+    "watch": "nodemon ./start.js",
+    "postinstall": "(cd core-lib && npm install);",
+    "dev": "concurrently --kill-others \"npm run watch-extract\" \"npm run watch-transform\" \"npm run watch-load\" \"npm run watch-queue-extract\" \"npm run watch-queue-transform\" \"npm run watch-queue-load\"",
+    "dev-without-load": "concurrently --kill-others \"npm run watch-extract\" \"npm run watch-transform\" \"npm run watch-scheduler\" \"npm run watch-queue-extract\" \"npm run watch-queue-transform\" \"npm run watch-queue-load\"",
+    "dev-without-extract": "concurrently --kill-others \"npm run watch-load\" \"npm run watch-transform\" \"npm run watch-scheduler\" \"npm run watch-queue-extract\" \"npm run watch-queue-transform\" \"npm run watch-queue-load\"",
+    "dev-without-transform": "concurrently --kill-others \"npm run watch-load\" \"npm run watch-extract\" \"npm run watch-scheduler\" \"npm run watch-queue-extract\" \"npm run watch-queue-transform\" \"npm run watch-queue-load\"",
+    "dev-queues": "concurrently --kill-others \"npm run queue-extract\" \"npm run queue-transform\" \"npm run queue-load\"",
+    "dev-queue": "concurrently --kill-others \"npm run queue-load\"",
+    "dev-etl": "concurrently --kill-others \"npm run extract\" \"npm run transform\" \"npm run load\""
+  },
+  "keywords": [],
+  "author": "oded",
+  "license": "ISC",
+  "workspaces": [
+    "./services/etlProcessors/extractService/",
+    "./services/etlProcessors/transformService/",
+    "./services/etlProcessors/loadService/"
+  ],
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "config": "3.3.6",
+    "express": "^4.17.1",
+    "mongodb": "^3.6.6",
+    "mongoose": "^5.12.3"
+  },
+  "devDependencies": {
+    "concurrently": "^6.0.1",
+    "nodemon": "^2.0.7"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "queue-lib",
+  "main": "index.js",
+  "version": "1.0.0",
+  "private": true,
+  "nodemonConfig": {
+    "ignore": [
+      "test/*",
+      "docs/*"
+    ],
+    "delay": "2500"
+  },
+  "description": "",
+  "peerDependencies": {
+    "config": "^3.3.1",
+    "express": "^4.17.1"
+  },
+  "engines": {}
+}

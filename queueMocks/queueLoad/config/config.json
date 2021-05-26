@@ -1,0 +1,9 @@
+{
+    "env": "Dev",
+    "serviceName": "queue extract",
+    "queueName":"superQueue",
+    "queue":{
+        "connectionString":"http://localhost:3003",
+        "port": "3003"
+    }
+}

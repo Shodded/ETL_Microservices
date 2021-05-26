@@ -1,0 +1,13 @@
+{
+    "env": "Dev",
+    "serviceName": "transformationService",
+    "queueReceiver":{
+        "connectionString":"http://localhost:3002"
+    },
+    "queueSender":{
+        "connectionString":"http://localhost:3003"
+    },
+    "mongoDB":{
+        "connectionString": "mongodb://localhost:27017/local"
+    }
+}
